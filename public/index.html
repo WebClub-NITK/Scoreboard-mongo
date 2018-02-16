@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>ScoreBoard</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+</head>
+<body>
+<div class="container" ng-controller="AppCtrl">
+    <h1 style="text-align: center;">ScoreBoard</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Rank</th>
+            <th>Team Name</th>
+            <th>Event1-Time</th>
+            <th>Event1-Points</th>
+            <th>Event2-Time</th>
+            <th>Event2-Points</th>
+            <th>Event3-Time</th>
+            <th>Event3-Points</th>
+            <th>Total Time</th>
+            <th>Total Score</th>
+            <th>Action</th>
+            <th>&nbsp;</th>
+        </tr>
+        </thead>
+        <tr>
+            <td></td>
+            <td><input class="form-control" ng-model="score.name" id="name"></td>
+            <td><input class="form-control" ng-model="score.etime[0]" id="etime[0]"></td>
+            <td><input class="form-control" ng-model="score.escore[0]" id="escore[0]"></td>
+            <td><input class="form-control" ng-model="score.etime[1]" id="etime[1]"></td>
+            <td><input class="form-control" ng-model="score.escore[1]" id="escore[1]"></td>
+            <td><input class="form-control" ng-model="score.etime[2]" id="etime[2]"></td>
+            <td><input class="form-control" ng-model="score.escore[2]" id="escore[2]"></td>
+            <td></td>
+            <td></td>
+            <td><button class="btn btn-primary" ng-click="add? addscore() : update(score._id)">{{action}}</button></td>
+            <td><button class="btn btn-info" ng-click="clear()">Clear</button></td>
+        </tr>
+        <tr ng-repeat="score in scorelist | orderBy:['-score','time'] track by $index">
+            <td>{{$index + 1}}</td>
+            <td>{{score.name}}</td>
+            <td>{{score.etime[0]}}</td>
+            <td>{{score.escore[0]}}</td>
+            <td>{{score.etime[1]}}</td>
+            <td>{{score.escore[1]}}</td>
+            <td>{{score.etime[2]}}</td>
+            <td>{{score.escore[2]}}</td>
+            <td>{{score.time}}</td>
+            <td>{{score.score}}</td>
+            <td><button class="btn btn-danger" ng-click="delete(score._id)">Delete</button></td>
+            <td><button class="btn btn-warning" ng-click="edit(score._id)">Edit</button></td>
+        </tr>
+
+    </table>
+</div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
+<script src="controllers/controller.js"></script>
+</html>
